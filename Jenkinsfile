@@ -15,14 +15,6 @@ pipeline {
             }
            }
         }
-       stage("install docker on ansible server"){
-            steps {
-              sshagent(['ansible_demo']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.19.110 cd /home/ubuntu/'
-                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.19.110 ansible-playbook ansible.yaml'
-            }
-          }
-        }
          stage("docker build image"){
             steps {
               sshagent(['ansible_demo']) {
