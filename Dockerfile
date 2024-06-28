@@ -1,11 +1,16 @@
-FROM ubuntu
-RUN apt-get update -y
-RUN apt-get install apache2 -y
-RUN apt-get install unzip -y
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page294/jobentry.zip /var/www/html
-WORKDIR /var/www/html
-RUN unzip jobentry.zip
-RUN cp -rvf job-portal-website-template/* .
-RUN rm -rf job-portal-website-template jobentry.zip
+FROM centos
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum -y install java
+CMD /bin/bash
+RUN yum install -y httpd
+RUN yum install -y zip
+RUN yum install -y unzip
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
+WORKDIR /var/www/html/
+RUN sh -c 'unzip -q "*.zip"'
+RUN cp -rvf photogenic/* .
+RUN rm -rf photogenic photogenic.zip
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
-CMD ["/usr/sbin/apache2ctl" , "-D" , "FOREGROUND"]
