@@ -14,7 +14,7 @@ spec:
       spec:
        containers:
         - name: jyoti
-          image: jyotichaudhary90/webimage
+          image: jyotichaudhary90/website
           imagePullPolicy: Always
           ports:
           - containerPort: 80
