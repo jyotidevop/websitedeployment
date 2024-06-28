@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: jyoti
+spec:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     app: jyoti
+   template:
+      metadata:
+        labels:
+          app: jyoti
+      spec:
+       containers:
+        - name: jyoti
+          image: jyotichaudhary90/webimage
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
