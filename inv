@@ -1,4 +1,4 @@
 [ansibleserver]
 3.91.50.146
-[kubernetes]
-
+[webserver]
+100.25.132.91
