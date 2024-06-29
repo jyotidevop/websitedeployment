@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: jyoti_svc
 spec:
- selector:
+  selector:
     app: jyoti
   ports:
     - protocol: TCP
