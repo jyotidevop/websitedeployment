@@ -1,4 +1,4 @@
-kind: Service                             
+ickind: Service                             
 apiVersion: v1
 metadata:
   name: jyoti
