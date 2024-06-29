@@ -1,10 +1,10 @@
 - hosts: master
-  gather_facts: no
-  tasks:
+  tasks: 
      - name: create new deployment
        command: kubectl apply -f /home/ubuntu/Deployment.yaml
      - name: create new service
        command: kubectl apply -f /home/ubuntu/Service.yaml
+     
 
 
 ~
