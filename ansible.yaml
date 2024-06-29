@@ -1,12 +1,9 @@
 ---
-- hosts: master
-  become: true
-  tasks:  
+ - hosts: master
+   tasks:
      - name: create new deployment
-       k8s:
-        definition: "{{ lookup('file', 'Deployment.yaml') }}"
-        state: present
+       command: kubectl apply -f /home/ubuntu/Deployment.yaml
      - name: create new service
-       k8s:
-        definition: "{{ lookup('file', 'Service.yaml') }}"
-        state: present
+       command: kubectl apply -f /home/ubuntu/Service.yaml
+~
+~
