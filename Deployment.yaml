@@ -14,6 +14,6 @@ spec:
       spec:
        containers:
         - name: jyoti
-          image: jyotichaudhary90/static
+          image: jyotichaudhary90/static:latest
           ports:
           - containerPort: 80
