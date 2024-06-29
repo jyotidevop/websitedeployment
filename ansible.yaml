@@ -1,11 +1,11 @@
 - hosts: webserver
   become: true
-  tasks: 
-     - name: delete old deployment
-       command: kubectl delete -f /home/ubuntu/Deployment.yaml
-     - name: delete old service
-       command: kubectl delete -f /home/ubuntu/Service.yaml
+  tasks:  
      - name: create new deployment
-       command: kubectl apply -f /home/ubuntu/Deployment.yaml
+       k8s:
+        definition: "{{ lookup('file', 'Deployment.yaml') }}"
+        state: present
      - name: create new service
-       command: kubectl apply -f /home/ubuntu/Service.yaml
+       k8s:
+        definition: "{{ lookup('file', 'Service.yaml') }}"
+        state: present
