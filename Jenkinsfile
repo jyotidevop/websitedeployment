@@ -11,11 +11,11 @@ pipeline {
             steps {
               sshagent(['ansible_demo']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.17.57'
-                sh 'scp /var/lib/jenkins/workspace/website/* ubuntu@172.31.17.57:/home/ubuntu/'
+                sh 'scp /var/lib/jenkins/workspace/static/* ubuntu@172.31.17.57:/home/ubuntu/'
             }
            }
         }
-       stage("docker build image"){
+         stage("docker build image"){
             steps {
               sshagent(['ansible_demo']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.17.57 cd /home/ubuntu/'
@@ -23,7 +23,7 @@ pipeline {
             }
            }
          }
-         stage("docker image tagging"){
+      stage("docker image tagging"){
             steps {
               sshagent(['ansible_demo']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.17.57 cd /home/ubuntu/'
@@ -45,7 +45,21 @@ pipeline {
           }
         }
       }
+           stage("sending deployment and service file to kubernetes server"){
+            steps {
+              sshagent(['kubernetes_server']) {
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.56.115'
+                sh 'scp /var/lib/jenkins/workspace/static/* ubuntu@172.31.56.115:/home/ubuntu/'
+            }
+           }
+        } 
+        stage("run ansible playbook to deploy container on remote server"){
+            steps {
+              sshagent(['ansible_demo']) {
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.17.57 cd /home/ubuntu/'
+                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.17.57 sudo ansible-playbook ansible.yaml'
+            }
+          }
+        } 
     }
 }
-
-
