@@ -1,12 +1,8 @@
----
-- name: deployment of website 
-  hosts: master
+- hosts: master
   tasks: 
-  - name: create new deployment
-    command: kubectl apply -f /home/ubuntu/Deployment.yaml
-  - name: create new service
-    command: kubectl apply -f /home/ubuntu/Service.yaml
+     - name: create deployment
+       command: kubectl apply -f /home/ubuntu/Deployment.yaml
+     - name: create service
+       command: kubectl apply -f /home/ubuntu/Service.yaml
      
 
-
-~
